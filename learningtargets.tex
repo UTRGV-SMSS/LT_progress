@@ -1,0 +1,118 @@
+\usepackage{tcolorbox}
+\usepackage{xargs}
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{probsoln}
+
+%%%%%%%%%%%%%%New Commands%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% check and x-mark
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+
+
+\newcommand{\defaultcriteria}{%
+    \item All calculus work is done correctly. Sufficient work shown. Use exact answers, not decimal approximations.
+    \item Uses calculus to arrive at the answer, not graphical or numerical estimates or guesses.
+     \item One or two small arithmetic mistakes may be accepted if it does not significantly alter the problem's intent.
+}
+
+\newcommandx{\defineLT}[5][2=\relax,5=\defaultcriteria]{%
+  \expandafter\newcommand\csname#1\endcsname[1]{%
+\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
+#3: #4  & \cxI \, \bxI 
+\end{tabular}
+
+}}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defineLT{LI}[*]{L1}{I can evaluate a limit graphically or numerically including one-sided and infinite limits.}[
+    \item All calculus work is done correctly. \item Use exact answers, not decimal approximations.
+]
+
+\defineLT{LII}[*]{L2}{I can evaluate a limit analytically (using algebra), including one-sided and infinite limits.}
+
+\defineLT{LIII}{L3}{I can recognize points at which a function is (and is not) continuous and can use continuity to evaluate limits.}
+
+\defineLT{LIV}{L4}{I can describe the behavior of a function on an interval using the Intermediate Value Theorem.}
+
+\defineLT{LV}{L5}{I can identify limits in indeterminate form and apply L'Hopital's rule correctly. }
+
+\defineLT{DMI}{DM1}{I can understand the limit definition of the derivative and calculate the derivative at a point.}
+
+
+\defineLT{DMII}[*]{DM2}{I can calculate and interpret instantaneous rates of
+  change at a point using graphs and tables, and I can understand the difference
+  between the instantaneous rate of change and the average rate of change.}
+
+\defineLT{DMIII}{DM3}{I can interpret the average and instantaneous rate of
+change using secant and tangent lines.}
+
+\defineLT{DMIV}[*]{DM4}{I can sketch the derivative function from the graph of a
+given function (specifically $f'$ from $f$).}
+
+
+\defineLT{DMV}[*]{DM5}{I can find the tangent line to a function at a given
+point.}
+
+
+\defineLT{DMVI}{DM6}{I can recognize points at which a function is (and is not)
+  differentiable, and can use the definition or interpretation of the derivative
+to support my thinking.}
+
+
+\defineLT{DMVII}{DM7}{%
+I can use tangent lines to approximate function values, when appropriate.
+}
+
+\defineLT{DSI}[*]{DS1}{%
+I can compute derivatives correctly using the constant, constant multiple, the
+power rules, and sum and difference rules of power functions.
+}
+
+\defineLT{DSII}[*]{DS2}{%
+I can use the Product and Quotient Rules to compute derivatives of simple algebraic, trigonometric, exponential, and logarithmic functions in combination.
+}
+
+
+\defineLT{DSIII}[*]{DS3}{%
+I can use the Chain Rule to compute derivatives of simple algebraic, trigonometric,exponential, and logarithmic functions in combination.
+}
+
+
+\defineLT{DSIV}{DS4}{%
+I can use a combination of the Product, Quotient, and Chain Rules to compute derivatives of simple algebraic, trigonometric, exponential, and logarithmic functions in combination.% (Sections 3.5, 3.6, 3.9)
+}
+
+
+\defineLT{DSV}{DS5}{%
+I can compute derivatives correctly using implicit differentiation.
+}
+
+\defineLT{DSVI}{DS6}{%
+I can compute derivatives correctly using logarithmic differentiation.
+}
+
+\defineLT{DAI}{DA1}{I can correctly interpret the meaning of a derivative in
+context (e.g. velocity, acceleration).}
+
+
+\defineLT{DAII}[*]{DA2}{I can use calculus to find local and absolute extrema of functions.}
+
+
+\defineLT{DAIII}{DA3}{I can interpret the meaning of the Mean Value Theorem.}
+
+
+\defineLT{DAIV}[*]{DA4}{I can explain the relationship between a function and its
+  first and second derivatives (concavity, increasing/decreasing, points of
+inflection).}
+
+
+\defineLT{DAV}{DA5}{%
+I can solve related rates problems.
+}
