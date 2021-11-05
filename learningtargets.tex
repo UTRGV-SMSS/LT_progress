@@ -18,9 +18,11 @@
 }
 
 \newcommandx{\defineLT}[5][2=\relax,5=\defaultcriteria]{%
-  \expandafter\newcommand\csname#1\endcsname[1]{%
-\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
-#3: #4  & \cxI \, \bxI 
+  \expandafter\newcommand\csname#1\endcsname[2]{%
+\begin{tabular}{@{}m{0.85\textwidth}m{0.15\textwidth}@{}}
+\textbf{\sffamily#3{\large#2}}: #4  & 
+\ifthenelse{\equal{##1}{1}}{\cxi\,}{\cxI\,}
+\ifthenelse{\equal{##2}{1}}{\bxi}{\bxI}
 \end{tabular}
 
 }}
