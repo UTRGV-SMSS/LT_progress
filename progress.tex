@@ -5,95 +5,52 @@
 
 
 
-\title{Math 2413: Learning Targets Progress Tracker}
+\title{Math 2413: Learning Targets Progress}
 \date{Fall 2021}
+
+\newcommand{\name}[1]{
+\gdef\ggname{#1}
+}
+
+% \renewcommand{\section}[1]{
+% \gdef\ggsection{\;Section{}#1}
+% }
+\newcommand{\email}[1]{
+\gdef\ggemail{#1}
+}
+
+\renewcommand{\maketitle}{
+
+\setcounter{page}{1}
+\rhead{\sffamily{}Page \thepage~of~2}
+\lhead{{\sffamily{}\handouttitle} -- \sffamily{}\ggname}
+\fancypagestyle{firstpage}{%
+    \lhead{}
+}
+
+\thispagestyle{firstpage}
+\textsf{\LARGE\bfseries\handouttitle}
+\large
+\sffamily
+\hfill{}\ggname\rule{2.5in-\widthof{\ggname}}{0.0pt}\\[0.3em]
+\textsf{\LARGE\bfseries\thedate}
+\hfill{}\ggemail\rule{2.5in-\widthof{\ggemail}}{0.0pt}\\[0.4em]
+\normalsize
+\normalfont
+
+}
 
 
 \begin{document}
-\maketitle
 
 
-\newcommand{\bxi}{\tikz \draw[thick] (0,0) rectangle ++(0.8,0.8) ++ (-0.4,-0.4) node {\Large\,\cmark};}
-\newcommand{\bxI}{\tikz \draw[thick] (0,0) rectangle ++(0.8,0.8);}
-\newcommand{\cxi}{\tikz \draw[thick] (0cm,0cm) circle(0.40cm) node {\Large\,\cmark};}
-\newcommand{\cxI}{\tikz \draw[thick] (0cm,0cm) circle(0.40cm);}
+\newcommand{\bxi}{\tikz \draw[thick] (0,0) rectangle ++(0.5,0.5) ++ (-0.20,-0.25) node {\cmark};}
+\newcommand{\bxI}{\tikz \draw[thick] (0,0) rectangle ++(0.5,0.5);}
+\newcommand{\cxi}{\tikz \draw[thick] (0cm,0cm) circle(0.25cm) ++ (0.03,0) node {\cmark};}
+\newcommand{\cxI}{\tikz \draw[thick] (0cm,0cm) circle(0.25cm);}
 
 
-\vfill
-
-
-
-\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
-Group L: I can calculate, use, and explain the idea of Limits. &  \\
-\midrule
-\end{tabular}
-\LI{0}{0}
-\LII{0}{0}
-\LIII{0}{0}
-\LIV{0}{0}
-\LV{0}{0}
-
-\vfill
-
-\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
-Group DM: I can calculate, use, and explain the idea of Limits. &  \\
-\midrule
-\DMI{0}{0}
-\DMII{0}{0}
-\DMIII{0}{0}
-\DMIV{0}{0}
-\DMV{0}{0}
-\DMVI{0}{0}
-\DMVII{0}{0}
-\end{tabular}
-
-\vfill
-
-\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
-Group DS: I can use multiple strategies to calculate derivatives efficiently.  &  \\
-\midrule
-\end{tabular}
-\DSI{0}{0}
-\DSII{0}{0}
-\DSIII{0}{0}
-\DSIV{0}{0}
-\DSV{0}{0}
-\DSVI{0}{0}
-
-\vfill
-
-\newpage`
-
-
-
-\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
-Group DA: I can use derivatives to understand and solve applications. & \\
-\midrule
-\end{tabular}
-\DAI{0}{0}
-\DAII{0}{0}
-\DAIII{0}{0}
-\DAIV{0}{0}
-\DAV{0}{0}
-\DAVI{0}{0}
-
-\vfill
-
-\begin{tabular}{@{}m{0.7\textwidth}m{0.3\textwidth}@{}}
-Group FTC: I can calculate and explain the meaning of integrals. & \\
-\midrule
-\end{tabular}
-\FTCI{0}{0}
-\FTCII{0}{0}
-\FTCIII{0}{0}
-\FTCIV{0}{0}
-\FTCV{0}{0}
-\FTCVI{0}{0}
-\FTCVII{0}{0}
-\FTCVIII{0}{0}
-
-
-\vfill
+\input{students.tex}
 
 
 

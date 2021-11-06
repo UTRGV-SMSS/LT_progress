@@ -2,7 +2,29 @@
 \usepackage{xargs}
 \usepackage{xparse}
 \usepackage{ifthen}
-\usepackage{probsoln}
+\usepackage{totcount}
+
+\newcounter{noncorelts}
+\newcounter{corelts}
+\newcounter{totallts}
+\newcounter{gradeAp}
+\newcounter{gradeA}
+\newcounter{gradeArowI}
+\newcounter{gradeArowII}
+\newcounter{gradeB}
+\newcounter{gradeC}
+\newcounter{gradeCrowI}
+\newcounter{gradeCrowII}
+\newcounter{gradeCrowIII}
+
+
+\newcounter{leftoverI}
+\newcounter{leftoverII}
+\newcounter{leftoverIII}
+\newcounter{leftoverIV}
+\newcounter{leftoverV}
+\newcounter{leftoverVI}
+\newcount\foo
 
 %%%%%%%%%%%%%%New Commands%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -17,15 +39,44 @@
      \item One or two small arithmetic mistakes may be accepted if it does not significantly alter the problem's intent.
 }
 
-\newcommandx{\defineLT}[5][2=\relax,5=\defaultcriteria]{%
-  \expandafter\newcommand\csname#1\endcsname[2]{%
-\begin{tabular}{@{}m{0.85\textwidth}m{0.15\textwidth}@{}}
-\textbf{\sffamily#3{\large#2}}: #4  & 
-\ifthenelse{\equal{##1}{1}}{\cxi\,}{\cxI\,}
-\ifthenelse{\equal{##2}{1}}{\bxi}{\bxI}
+\newcommandx{\defineLT}[5][2={},5=\defaultcriteria]{%
+
+\newbool{#1ws}
+\newbool{#1ex}
+\newbool{#1corelt}
+
+\ifthenelse{\equal{#2}{1}}{%
+\expandafter\newcommand\csname#1marker\endcsname{*}
+\booltrue{#1corelt}
+}{%
+\expandafter\newcommand\csname#1marker\endcsname{\relax}
+\boolfalse{#1corelt}
+}
+
+\expandafter\newcommand\csname#1\endcsname{%
+% \if #2 foo \else bar \fi
+\begin{tabular}{@{}m{0.90\textwidth}m{0.02\textwidth}m{0.02\textwidth}@{}}
+\textbf{\sffamily#3{\large\csname#1marker\endcsname}}: #4  & 
+\ifbool{#1ws}{\cxi\,}{\cxI\,} & 
+\ifbool{#1ex}{\bxi\,}{\bxI\,}
 \end{tabular}
+\\
+}
 
-}}
+\expandafter\newcommand\csname#1set\endcsname[2]{%
+\ifthenelse{\equal{##1}{1}}{\booltrue{#1ws}}{\boolfalse{#1ws}}
+\ifthenelse{\equal{##2}{1}}{\booltrue{#1ex}}{\boolfalse{#1ex}}
+\ifbool{#1ex}{\ifbool{#1ws}{%
+    \stepcounter{totallts}
+    \ifbool{#1corelt}{\stepcounter{corelts}}{\relax}
+}{\relax}}{\relax}
+}
+
+\expandafter\newcommand\csname#1full\endcsname{%
+\ifbool{#1ex}{\ifbool{#1ws}{\bxi}{\bxI}}{\bxI}
+}
+
+}
 
 
 
@@ -33,11 +84,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\defineLT{LI}[*]{L1}{I can evaluate a limit graphically or numerically including one-sided and infinite limits.}[
+\defineLT{LI}[1]{L1}{I can evaluate a limit graphically or numerically including one-sided and infinite limits.}[
     \item All calculus work is done correctly. \item Use exact answers, not decimal approximations.
 ]
 
-\defineLT{LII}[*]{L2}{I can evaluate a limit analytically (using algebra), including one-sided and infinite limits.}
+\defineLT{LII}[1]{L2}{I can evaluate a limit analytically (using algebra), including one-sided and infinite limits.}
 
 \defineLT{LIII}{L3}{I can recognize points at which a function is (and is not) continuous and can use continuity to evaluate limits.}
 
@@ -48,18 +99,18 @@
 \defineLT{DMI}{DM1}{I can understand the limit definition of the derivative and calculate the derivative at a point.}
 
 
-\defineLT{DMII}[*]{DM2}{I can calculate and interpret instantaneous rates of
+\defineLT{DMII}[1]{DM2}{I can calculate and interpret instantaneous rates of
   change at a point using graphs and tables, and I can understand the difference
   between the instantaneous rate of change and the average rate of change.}
 
 \defineLT{DMIII}{DM3}{I can interpret the average and instantaneous rate of
 change using secant and tangent lines.}
 
-\defineLT{DMIV}[*]{DM4}{I can sketch the derivative function from the graph of a
+\defineLT{DMIV}[1]{DM4}{I can sketch the derivative function from the graph of a
 given function (specifically $f'$ from $f$).}
 
 
-\defineLT{DMV}[*]{DM5}{I can find the tangent line to a function at a given
+\defineLT{DMV}[1]{DM5}{I can find the tangent line to a function at a given
 point.}
 
 
@@ -72,17 +123,17 @@ to support my thinking.}
 I can use tangent lines to approximate function values, when appropriate.
 }
 
-\defineLT{DSI}[*]{DS1}{%
+\defineLT{DSI}[1]{DS1}{%
 I can compute derivatives correctly using the constant, constant multiple, the
 power rules, and sum and difference rules of power functions.
 }
 
-\defineLT{DSII}[*]{DS2}{%
+\defineLT{DSII}[1]{DS2}{%
 I can use the Product and Quotient Rules to compute derivatives of simple algebraic, trigonometric, exponential, and logarithmic functions in combination.
 }
 
 
-\defineLT{DSIII}[*]{DS3}{%
+\defineLT{DSIII}[1]{DS3}{%
 I can use the Chain Rule to compute derivatives of simple algebraic, trigonometric,exponential, and logarithmic functions in combination.
 }
 
@@ -104,13 +155,13 @@ I can compute derivatives correctly using logarithmic differentiation.
 context (e.g. velocity, acceleration).}
 
 
-\defineLT{DAII}[*]{DA2}{I can use calculus to find local and absolute extrema of functions.}
+\defineLT{DAII}[1]{DA2}{I can use calculus to find local and absolute extrema of functions.}
 
 
 \defineLT{DAIII}{DA3}{I can interpret the meaning of the Mean Value Theorem.}
 
 
-\defineLT{DAIV}[*]{DA4}{I can explain the relationship between a function and its
+\defineLT{DAIV}[1]{DA4}{I can explain the relationship between a function and its
   first and second derivatives (concavity, increasing/decreasing, points of
 inflection).}
 
