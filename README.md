@@ -1,13 +1,14 @@
-# LT_progress
+# Learning Targets Progress Tracker
 
 
-To run this script, you need to have the CSV and DataFrames packages.  To add them run the following:
+These files generate a PDF checklist of Learning Targets and a Progress Grid updated from a Blackboard gradebook for all students.
 
-`using Pkg; Pkg.add(["CSV", "DataFrames"])`
+To run this script and to generate the PDF:
 
-
-The gradebook should be exported from Blackboard in the CSV format using commas not tabs as the seperators. You also need to delete any "Preview Users" from the CSV file.
-The name of the exported CSV file is expected to be `gb.csv`.
-
-
-After running the `process.jl` file, compile the `progress.tex` file using $\LaTeX$. 
+1. Make sure you have a $\LaTeX$ distribution and a recent version of Julia installed.
+2. Download the gradebook from Blackboard in the CSV format using commas not tabs as the separators.
+Rename the downloaded CSV file to 'gb.csv'
+3. Delete any "Preview Users" from the CSV file.
+4. In Julia run the code `using Pkg; Pkg.add(["CSV", "DataFrames"])`  to install the required packages.  This only needs to be run the first time Julia is run.
+5. run the script 'process.jl'.  This will generate a file 'students.tex'
+6. Compile the $\LaTeX$ file 'progress.tex'.
