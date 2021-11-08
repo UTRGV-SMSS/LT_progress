@@ -174,38 +174,38 @@ Supplementary\\ Learning Targets
 \begin{minipage}{1.1in}
 \rule{0pt}{1em}%
 $\geq 10$\\
-\ifthenelse{\value{gradeCrowI}=4}
-    {\foreach \n in {1,...,4}{\bxi}}
-    {
+\ifnum \value{gradeCrowI}=4
+    \foreach \n in {1,...,4}{\bxi}
+\else
         \ifnum \value{gradeCrowI}=0
             \foreach \n in {1,...,4}{\bxI\,}
         \else
             \foreach \n in {1,...,\value{gradeCrowI}}{\bxi}%
             \foreach \n in {1,...,\value{leftoverI}}{\bxI\,}
         \fi
-    }
+\fi
 \\
-\ifthenelse{\value{gradeCrowII}=4}
-    {\foreach \n in {1,...,4}{\bxi}}
-    {
+\ifnum \value{gradeCrowII}=4
+    \foreach \n in {1,...,4}{\bxi}
+\else
         \ifnum \value{gradeCrowII}=0
             \foreach \n in {1,...,4}{\bxI\,}
         \else
             \foreach \n in {1,...,\value{gradeCrowII}}{\bxi}%
             \foreach \n in {1,...,\value{leftoverII}}{\bxI\,}
         \fi
-    }
+\fi
 \\
-\ifthenelse{\value{gradeCrowIII}=2}
-    {\foreach \n in {1,...,2}{\bxi}}
-    {
+\ifnum \value{gradeCrowIII}=2
+    \foreach \n in {1,...,2}{\bxi}
+\else
         \ifnum \value{gradeCrowIII}=0
             \foreach \n in {1,...,2}{\bxI\,}
         \else
             \foreach \n in {1,...,\value{gradeCrowIII}}{\bxi}
             \foreach \n in {1,...,\value{leftoverIII}}{\bxI\,}
         \fi
-    }
+\fi
 \\
 \end{minipage}
 &
@@ -213,16 +213,16 @@ $\geq 10$\\
 \rule{0pt}{1em}%
 $\geq 13$\\
 \rule{0pt}{2em}%
-\ifthenelse{\value{gradeB}=3}
-    {\foreach \n in {1,...,3}{\bxi}}
-    {
+\ifnum \value{gradeB}=3
+    \foreach \n in {1,...,3}{\bxi}
+\else
         \ifnum \value{gradeB}=0
             \foreach \n in {1,...,3}{\bxI\,}
         \else
             \foreach \n in {1,...,\value{gradeB}}{\bxi}
             \foreach \n in {1,...,\value{leftoverIV}}{\bxI\,}
         \fi
-    }
+\fi
 \\
 \end{minipage}
 & 
@@ -230,27 +230,27 @@ $\geq 13$\\
 \rule{0pt}{1em}%
 $\geq 16$\\
 \rule{0pt}{2em}%
-\ifthenelse{\value{gradeArowI}=3}
-    {\foreach \n in {1,...,3}{\bxi}}
-    {
+\ifnum \value{gradeArowI}=3
+    \foreach \n in {1,...,3}{\bxi}
+\else
         \ifnum \value{gradeArowI}=0
             \foreach \n in {1,...,3}{\bxI\,}
         \else
             \foreach \n in {1,...,\value{gradeArowI}}{\bxi}
             \foreach \n in {1,...,\value{leftoverV}}{\bxI\,}
         \fi
-    }\\
+\fi\\
 Optional\\
-\ifthenelse{\equal{\value{gradeArowII}}{3}}
-    {\foreach \n in {1,...,3}{\bxi}}
-    {
+\ifnum \value{gradeArowII}=3
+    \foreach \n in {1,...,3}{\bxi}
+\else
         \ifnum \value{gradeArowII}=0
             \foreach \n in {1,...,3}{\bxI\,}
         \else
             \foreach \n in {1,...,\value{gradeArowII}}{\bxi}
             \foreach \n in {1,...,\value{leftoverVI}}{\bxI\,}
         \fi
-    }
+\fi
 \end{minipage}
 \\
 \hline
