@@ -10,7 +10,8 @@ col_names = replace(long_names) do name
     if contains(name, "-ws") || contains(name, "-ex")
         m = match(r"((.*-ws)|(.*-ex)).*", name)
         return m[1]
-
+    elseif contains(name, "WeBWorK")
+        return "hw_grade"
     else
         return name
     end
@@ -41,8 +42,10 @@ open(filename, "w") do file
 for student in eachrow(data)
     name = "\\name{" *  student."First Name" * " " * student."Last Name" * "}"
     email = "\\email{" * student."Username" * "}"
+    hw_grade = "\\hwgrade{$(student.hw_grade)}"
     write(file, name)
     write(file, email)
+    write(file, hw_grade)
     write(file, "\\maketitle\n")
     for lt in lts.Name
         lt_ws = lt * "-ws"
