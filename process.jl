@@ -10,7 +10,10 @@ col_names = replace(long_names) do name
     if contains(name, "-ws") || contains(name, "-ex")
         m = match(r"((.*-ws)|(.*-ex)).*", name)
         return m[1]
-    elseif contains(name, "WeBWorK")
+    elseif contains(name, "WeBWorK") || contains(name, "Webwork") || 
+            contains(name, "Homework") || contains(name, "HW") ||
+            contains(name, "homework")
+
         return "hw_grade"
     else
         return name
