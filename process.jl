@@ -43,9 +43,15 @@ lt_regex = r"(\w+)(\d+)"
 
 filename = "students.tex"
 
-open(filename, "w") do file
 # for student in eachrow(data[4:4, :])
 for student in eachrow(data)
+    username = match(r"(.*)@utrgv.edu", student."Username")
+    filename = "students/" * username[1] * ".tex"
+open(filename, "w") do file
+
+    write(file, "\\input{../head.tex}")
+    write(file, "\n\n")
+
     name = "\\name{" *  student."First Name" * " " * student."Last Name" * "}"
     email = "\\email{" * student."Username" * "}"
     hw_grade = "\\hwgrade{$(student.hw_grade)}"
@@ -73,5 +79,6 @@ for student in eachrow(data)
     write(file, "\\input{table}\n")
     write(file, "\\newpage\n")
     write(file, "\n\n")
+    write(file, "\\input{../tail.tex}")
 end
 end
