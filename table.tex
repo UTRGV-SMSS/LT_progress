@@ -206,7 +206,7 @@ $\geq 10$\\
         \ifnum \value{gradeCrowIII}=0
             \foreach \n in {1,...,2}{\bxI\,}
         \else
-            \foreach \n in {1,...,\value{gradeCrowIII}}{\bxi}
+            \foreach \n in {1,...,\value{gradeCrowIII}}{\bxi}%
             \foreach \n in {1,...,\value{leftoverIII}}{\bxI\,}
         \fi
 \fi
@@ -223,7 +223,7 @@ $\geq 13$\\
         \ifnum \value{gradeB}=0
             \foreach \n in {1,...,3}{\bxI\,}
         \else
-            \foreach \n in {1,...,\value{gradeB}}{\bxi}
+            \foreach \n in {1,...,\value{gradeB}}{\bxi}%
             \foreach \n in {1,...,\value{leftoverIV}}{\bxI\,}
         \fi
 \fi
@@ -240,7 +240,7 @@ $\geq 16$\\
         \ifnum \value{gradeArowI}=0
             \foreach \n in {1,...,3}{\bxI\,}
         \else
-            \foreach \n in {1,...,\value{gradeArowI}}{\bxi}
+            \foreach \n in {1,...,\value{gradeArowI}}{\bxi}%
             \foreach \n in {1,...,\value{leftoverV}}{\bxI\,}
         \fi
 \fi\\
@@ -251,7 +251,7 @@ Optional\\
         \ifnum \value{gradeArowII}=0
             \foreach \n in {1,...,3}{\bxI\,}
         \else
-            \foreach \n in {1,...,\value{gradeArowII}}{\bxi}
+            \foreach \n in {1,...,\value{gradeArowII}}{\bxi}%
             \foreach \n in {1,...,\value{leftoverVI}}{\bxI\,}
         \fi
 \fi
