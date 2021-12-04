@@ -12,7 +12,7 @@ col_names = replace(long_names) do name
         return m[1]
     elseif contains(name, "WeBWorK") || contains(name, "Webwork") || 
             contains(name, "Homework") || contains(name, "HW") ||
-            contains(name, "homework")
+            contains(name, "homework") || contains(name, "webwork")
 
         return "hw_grade"
     else
