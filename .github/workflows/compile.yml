@@ -1,0 +1,20 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Run Julia and Build LaTeX document
+
+# Controls when the action will run. 
+on: [push, workflow_dispatch]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  lint_and_build_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Setup Julia environment
+        uses: julia-actions/setup-julia@v1.6.1
+      - run: julia process.jl
+      - name: Setup LaTeX environment
+        uses: dante-ev/latex-action@latest
+      - run: make
