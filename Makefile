@@ -7,7 +7,7 @@ gb.csv:
 	touch gb.csv
 
 students.tex: gb.csv
-	julia process.jl
+	julia --project=. process.jl
 
 all_students.pdf: students.tex 
 	rm -f latex.out/progress.pdf
