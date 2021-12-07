@@ -23,8 +23,8 @@ end
 
 rename!(data, long_names .=> col_names)
 
-previewusers = findall(contains("previewuser"), data.Username)
-delete!(data, previewusers)
+# previewusers = findall(contains("previewuser"), data.Username)
+# delete!(data, previewusers)
 
 
 NUMERAL_MAP = Dict(
