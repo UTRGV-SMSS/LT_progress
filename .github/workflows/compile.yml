@@ -2,7 +2,7 @@
 
 name: Run Julia and Build LaTeX document
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on: [push, workflow_dispatch]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -15,13 +15,17 @@ jobs:
 
       - name: Setup Julia environment
         uses: julia-actions/setup-julia@v1.6.1
-          #- run: julia --environment=. process.jl
+        with:
+          version: 1.6.2
+
+      - name: Run script
+        run: "julia --project=. -e 'using Pkg; Pkg.instantiate()' && cp g*.csv gb.csv && julia --project=. process.jl"
 
       - name: Setup LaTeX environment
-        uses: dante-ev/latex-action@latest
+        uses: xu-cheng/latex-action@master
         with:
           root_file: progress.tex
-          pre_compile: "make"
+          post_compile: "mv progress.pdf all_students.pdf"
 
       - name: Upload PDF File to Workflow tab
         uses: actions/upload-artifact@v2
