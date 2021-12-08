@@ -21,4 +21,10 @@ jobs:
         uses: dante-ev/latex-action@latest
         with:
           root_file: progress.tex
-          pre_compile: make
+          pre_compile: "make"
+
+      - name: Upload PDF File to Workflow tab
+        - uses: actions/upload-artifact@v2
+            with:
+              name: PDF
+              path: all_students.pdf
