@@ -11,7 +11,7 @@ students.tex: gb.csv
 
 all_students.pdf: students.tex 
 	rm -f latex.out/progress.pdf
-	pdflatex progress.tex
+	latexmk  progress.tex
 	mv progress.pdf all_students.pdf
 
 .PHONY: clean open_pdf
