@@ -24,7 +24,7 @@ jobs:
         pre_compile: "make"
 
       - name: Upload PDF File to Workflow tab
-        - uses: actions/upload-artifact@v2
-            with:
-              name: PDF
-              path: all_students.pdf
+      - uses: actions/upload-artifact@v2
+          with:
+            name: PDF
+            path: all_students.pdf
