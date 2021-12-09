@@ -19,7 +19,7 @@ jobs:
           version: 1.6.2
 
       - name: Run script
-        run: "julia --project=. -e 'using Pkg; Pkg.instantiate()' && cp g*.csv gb.csv && julia --project=. process.jl"
+        run: "julia --project=. -e 'using Pkg; Pkg.instantiate()' && cp g*.csv gb.csv 2>/dev/null && julia --project=. process.jl"
 
       - name: Setup LaTeX environment
         uses: xu-cheng/latex-action@master
