@@ -7,6 +7,7 @@ gb.csv:
 	touch gb.csv
 
 students.tex: gb.csv
+	julia --project=. -e 'using Pkg; Pkg.instantiate()'
 	julia --project=. process.jl
 
 all_students.pdf: students.tex 
