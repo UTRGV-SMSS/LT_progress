@@ -78,3 +78,20 @@ open(filename, "w") do file
         write_student(student, file)
     end
 end
+
+
+try 
+    mkdir("students")
+catch IOError
+    println("directory 'students' already exists")
+end
+
+
+
+for student in eachrow(data)
+    username = match(r"(.*)@utrgv.edu", student."Username")
+    filename = "students/" * username[1] * ".tex"
+    open(filename, "w") do file
+        write_student(student, file)
+    end
+end
