@@ -6,20 +6,20 @@ gb.csv:
 	mv g*.csv gb.csv
 	touch gb.csv
 
-students.tex: gb.csv
+all_students.tex: gb.csv
 	julia --project=. -e 'using Pkg; Pkg.instantiate()'
 	julia --project=. process.jl
 
-all_students.pdf: students.tex 
-	rm -f latex.out/progress.pdf
-	latexmk  progress.tex
-	mv progress.pdf all_students.pdf
+all_students.pdf: all_students.tex 
+	rm -f latex.out/all_students.pdf
+	rm -f all_students.pdf
+	latexmk  all_students.tex
 
 .PHONY: clean open_pdf
 clean:
-	rm -f students.tex 
+	rm -r students
+	rm -f all_students.tex 
 	rm -f all_students.pdf
-	rm -f progress.pdf
 	rm -rf latex.out/
 
 open_pdf: all_students.pdf
