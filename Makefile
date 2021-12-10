@@ -14,6 +14,8 @@ all_students.pdf: all_students.tex
 	rm -f latex.out/all_students.pdf
 	rm -f all_students.pdf
 	latexmk  all_students.tex
+	open all_students.pdf
+	cd students && latexmk *.tex
 
 .PHONY: clean open_pdf
 clean:
