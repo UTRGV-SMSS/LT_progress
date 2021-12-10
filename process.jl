@@ -93,7 +93,7 @@ end
 
 
 for student in eachrow(data)
-    username = match(r"(.*)@utrgv.edu", student."Username")
+    username = match(r"(.*)@.*", student."Username")
     local filename = "students/" * username[1] * ".tex"
     open(filename, "w") do file
         write(file, "\\makeatletter\n")
