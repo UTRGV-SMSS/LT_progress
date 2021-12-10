@@ -25,12 +25,9 @@ jobs:
         uses: xu-cheng/latex-action@master
         with:
           root_file: all_students.tex
-          post_compile: "cd students && latexmk *.tex"
 
       - name: Upload PDF File to Workflow tab
         uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: |
-            all_students.pdf
-            students/*.pdf
+          path: all_students.pdf
