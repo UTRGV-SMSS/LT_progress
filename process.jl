@@ -94,8 +94,11 @@ end
 
 for student in eachrow(data)
     username = match(r"(.*)@utrgv.edu", student."Username")
-    filename = "students/" * username[1] * ".tex"
+    local filename = "students/" * username[1] * ".tex"
     open(filename, "w") do file
+        write(file, "\\makeatletter\n")
+        write(file, "\\def\\input@path{{../}}\n")
+        write(file, "\\makeatother\n\n")
         write(file, "\\input{head.tex}\n\n\n")
         write_student(student, file)
         write(file, "\n\n\n\\end{document}")
