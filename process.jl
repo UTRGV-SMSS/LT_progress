@@ -41,7 +41,6 @@ NUMERAL_MAP = Dict(
 
 lt_regex = r"(\w+)(\d+)"
 
-filename = "students.tex"
 
 function write_student(student, file)
     name = "\\name{" *  student."First Name" * " " * student."Last Name" * "}"
@@ -73,11 +72,16 @@ function write_student(student, file)
     write(file, "\n\n")
 end
 
+
+filename = "all_students.tex"
 open(filename, "w") do file
+    write(file, "\\input{head.tex}\n\n\n")
     for student in eachrow(data)
         write_student(student, file)
     end
+    write(file, "\n\n\n\\end{document}")
 end
+
 
 
 try 
