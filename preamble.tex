@@ -1,44 +1,23 @@
-\usepackage{graphicx}
-\graphicspath{{./}{pictures/}{pictures/build/}{graphics/}{graphics/build/}}
-\usepackage{docmute} % for muting preamble of input files
 \usepackage{geometry}
 \geometry{top=0.65in,bottom=0.50in,left=0.75in,right=0.75in}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{float}
-\usepackage{units}
-\usepackage[utf8]{inputenc}
-\usepackage{multicol}
-\usepackage{booktabs}
 \usepackage{calc} % for widthof
 
-\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
-\microtypecontext{spacing=nonfrench}
+% \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+% \microtypecontext{spacing=nonfrench}
 
-\usepackage{subcaption} % for \captionof command
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
-% \usepackage{lmodern}
 \usepackage[semibold]{raleway}
-% \let\sffamily\normalfont
-% \let\bfseries\relax
-
-\usepackage[usenames,dvipsnames,svgnames]{xcolor} % for colors
-\definecolor{ocre}{RGB}{0,135,255} % main color
-\definecolor{maincolor}{RGB}{0,145,255} % main color
-\definecolor{cqcqcq}{rgb}{0.75294117,0.75294117647,0.75294117647}
 
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta, arrows}
 
-\usepackage{xargs}
 \usepackage{colortbl} % for colored tables
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
     filecolor=magenta,
-    urlcolor=cyan,
+    urlcolor=black,
 }
 
 
@@ -50,7 +29,6 @@
 
 
 
-\makeatletter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set indent to zero, but save value just in case
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,204 +37,12 @@
 \setlength{\tindent}{\parindent}
 \setlength{\parindent}{0pt}
 \renewcommand{\indent}{\hspace*{\tindent}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcounter{example}[section]
-\newcommand{\example}{%
-  \vspace{4pt minus 3pt}
-  \par%
-  \refstepcounter{example}%
-  \noindent\textbf{Example~\arabic{example}.\,~}%
-}
-
-\newcounter{problem}[section]
-\newcommand{\problem}{%
-  \vspace{4pt minus 3pt}
-  \par%
-  \refstepcounter{problem}%
-  \noindent\textbf{\arabic{problem}.\,~}%
-}
-
-\newcounter{practice}[section]
-\newcommand{\quickpractice}{%
-  \vspace{4pt minus 3pt}
-  \par%
-  \refstepcounter{practice}%
-  \noindent\textbf{\sffamily\Large{}Quick Practice~\arabic{practice}}\\%
-  \vspace{-10pt}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% grid command
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\grid}[1]{%
-\begin{tikzpicture}
-  \draw[step=.5cm,cqcqcq,very thin] (-#1/2,-#1/2) grid (#1/2,#1/2);
-\end{tikzpicture}
-}
-
-
-\newcommandx{\cart}[3][2=1,3={}]{%
-%\par
-\begin{tikzpicture}[scale=#2]
-  \draw[step=.5cm,cqcqcq,very thin] (-#1/2,-#1/2) grid (#1/2,#1/2);
-  \draw[<->, black] (-#1/2,0) -- (#1/2,0);
-  \draw[<->, black] (0, -#1/2) -- (0, #1/2);
-  #3
-\end{tikzpicture}
-%\par
-}
-
-
-\newcommandx{\cartX}[6][5=1,6={}]{%
-\par
-\begin{tikzpicture}[scale=#5]
-  \draw[step=1cm,cqcqcq,very thin] (#1,#3) grid (#2,#4);
-  \draw[<->, black] (#1,0) -- (#2,0);
-  \draw[<->, black] (0, #3) -- (0, #4);
-  #6
-\end{tikzpicture}
-\par
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define new list types
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[inline, shortlabels]{enumitem} % customize lists
-
-\setlist[enumerate,1]{
-  label={\bfseries\arabic*.},
-  ref={\bfseries\arabic*.},
-  beginpenalty=2000, midpenalty=-5000, endpenalty=-9000,
-  leftmargin=1.6em,
-}
-
-\setlist[enumerate,2]{
-  label={\bfseries\alph*.},
-  ref={\alph*.},
-  beginpenalty=2000, midpenalty=-1000, endpenalty=-1000,
-  topsep={0pt plus 0pt minus 0pt},
-  wide,
-  leftmargin=1.3em,
-  labelwidth=!,
-}
-
-\newlist{benumerate}{enumerate}{1}
-\setlist[benumerate]{
-  label={\bfseries\alph*.},
-  ref={\alph*},
-  beginpenalty=2000, midpenalty=-1000, endpenalty=-1000,
-  topsep={0pt plus 0pt minus 0pt},
-  wide,
-  leftmargin=1.3em,
-  labelwidth=!,
-}
-
-
-\newlist{ienumerate}{enumerate*}{1}
-\setlist[ienumerate,1]{%
-  label={\bfseries\alph*.},
-  topsep={2pt plus 1pt minus 1pt},
-  afterlabel={~~},
-  itemjoin={\hfill}, after={\hfill\hfill},
-  before={\\*}
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Headings
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\usepackage{titlesec}
-
-\titleformat{\chapter}[display]
-  {\sffamily\huge\bfseries}{\color{maincolor}
-  {\chaptertitlename\ \thechapter}}{0pt}{\Huge}[]
-\titleformat{\section}
-  {\sffamily\LARGE\bfseries}
-  {\color{maincolor}{\thesection}}{8pt}{}[]
-\titleformat{\subsection}
-  {\sffamily\Large\bfseries}{}{0ex}{}
-\titleformat{\subsubsection}
-  {\sffamily\normalsize\bfseries}{\thesubsubsection}{1ex}{}
-\titleformat{\paragraph}[runin]
-  {\sffamily\normalsize\bfseries}{\theparagraph}{1em}{}
-\titleformat{\subparagraph}
-  {\sffamily\LARGE\bfseries}
-  {\color{maincolor}{\thesection}}{8pt}{}[]
-
-\titlespacing*{\chapter} {0in}{0pt}{9pt}
-\titlespacing*{\section} {0in}{3.5ex plus 1ex minus .2ex}{3.3ex plus .2ex}
-\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{0.5ex plus .2ex}
-\titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{1em}
-%\titlespacing*{\subparagraph} {\parindent}{3.25ex plus 1ex minus .2ex}{1em}
-\titlespacing*{\subparagraph} {-0in}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-\renewcommand{\bottomtitlespace}{2.5in}
-%\newcommand{\sectionbreak}{\clearpage}
-%\newcommand{\chapterbreak}{\cleardoublepage}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\setsection}[2]{%
-  \setcounter{chapter}{#1}
-  \setcounter{section}{#2}
-  \addtocounter{section}{-1}
-
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Table of Contents Styling
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\usepackage{titletoc} % Required for manipulating the table of contents
-\contentsmargin{0cm} % Removes the default margin
-
-
-% Part text styling
-\titlecontents{part}[0cm]
-{\addvspace{20pt}\centering\large\bfseries}
-{}
-{}
-{}
-
-% Chapter text styling
-\titlecontents{chapter}[1.00cm] % Indentation
-{\addvspace{5pt}\Large\sffamily\bfseries} % Spacing and font options for chapters
-{\color{maincolor}\contentslabel[\Large\thecontentslabel]{1.00cm}\color{maincolor}} % Chapter number
-{\color{maincolor}}
-{\color{maincolor}\Large\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-
-% Section text styling
-\titlecontents{section}[1.75em] % Indentation
-{\addvspace{5pt}\large\sffamily\bfseries} % Spacing and font options for chapters
-{\color{maincolor}\contentslabel[\large\thecontentslabel]{1.75em}\color{black}} % Chapter number
-{\color{black}}
-{\color{black}\large\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-[]
-
-% Subsection text styling
-\titlecontents{subsection}[1.75em] % Indentation
-{\addvspace{0pt}\sffamily\small} % Spacing and font options for subsections
-{} % Subsection number
-{}
-{\ \titlerule*[.5pc]{.}\;\thecontentspage} % Page number
-[]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PAGE HEADERS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\theclass}{\relax}
-\newcommand{\class}[1]{\gdef\theclass{#1}}
 
 \newcommand{\thedate}{\relax}
 \renewcommand{\date}[1]{\gdef\thedate{#1}}
@@ -284,14 +70,10 @@
 
 \pagestyle{fancy}
 
-% \renewcommand{\chaptermark}[1]{\markboth{\normalsize\bfseries\chaptername\ \thechapter\ \ #1}{}} % Chapter text font settings
 
-\renewcommand{\sectionmark}[1]{\markright{\normalsize\thesection\hspace{5pt}#1}{}} % Section text font settings
 \fancyhf{}
 
 
-\fancyhead[R]{\sffamily\rightmark\hspace{5ex}\thepage}
-%\fancyhead[L]{\ifthenelse{\isodd{\value{page}}}{}{\sffamily\thepage\hspace{5ex} \leftmark}}
 
 
 \renewcommand{\headrulewidth}{0pt}
@@ -301,150 +83,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% define a command to insert a blank page
-        \newcommand{\insertblankpage}{%
-          \newpage
-          \thispagestyle{empty}
-          \mbox{}
-          \newpage
-        }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define Objectives Environment
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{environ}
-
-\NewEnviron{objectives}[1]{%
-\vspace{0.5em}
-\subsection*{Objectives}
-
-\noindent%
-#1
-
-\vspace{-2.5mm}
-\begin{multicols}{2}
-\begin{itemize}[nosep,leftmargin=10.0pt]
-    \BODY
-\end{itemize}
-\end{multicols}
-
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Create blue box for definitions and theorems
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\tikzstyle{bluebox} = [fill=ocre!10, draw=ocre, very thick,
-    rectangle, rounded corners, inner sep=10pt, inner ysep=5pt]
-\tikzstyle{fancytitle} =[fill=ocre, text=white, rounded corners,
-    inner ysep=3pt, inner xsep=5pt]
-
-
-
-%\def\blueboxstring{bluebox}
-
-
-\newcommand{\bluebox}[2]{%
-\par
-\vspace{2mm minus 1mm}
-\begin{tikzpicture}%
-\node [bluebox] (box){%
-    \begin{minipage}{0.96\linewidth}%
-      \vspace{7pt}
-      #2
-    \end{minipage}
-};
-\node[fancytitle, right=10pt] at (box.north west) {%
-  \textsf{\bfseries{}#1}
-};
-\end{tikzpicture}
-\par
-\vspace{2mm}
-}
-
-
-%\NewEnviron{bluebox}[1]{%
-%\par
-%\vspace{2mm minus 1mm}
-%\begin{tikzpicture}%
-%\node [bluebox] (box){%
-    %\begin{minipage}{0.99\textwidth}%
-      %\vspace{7pt}
-      %\expandafter\BODY
-    %\end{minipage}
-%};
-%\node[fancytitle, right=10pt] at (box.north west) {%
-  %#1
-%};
-%\end{tikzpicture}
-%\par
-%\vspace{2mm}
-%}
-
-
-%\let\blueboxenvironment\bluebox
-
-
-%\def\bluebox#1{%
-  %\ifx\@currenvir\blueboxstring%
-    %\blueboxenvironment
-  %\else
-    %\blueboxcommand
-  %\fi
-%}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Redefine vfill command to take optional parameter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\renewcommand{\vfill}[1][1]{\vspace{\stretch{#1}}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define Goals Environment
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\goalnewline}{%
-& $\square$ & $\square$ & $\square $ \goalnewline@
-}
-
-\newenvironment{goals}
-  {\global\let\orignewline\\% Store meaning of \\ outside of tabular
-    \subsection*{Check yourself!}
-    \noindent
-    \begin{tabular}{@{}p{4.4in} c c c@{}} % Default paradigm tabular specification
-    \textbf{Section Goals} & \textbf{Got It!} & \textbf{Getting It} & \textbf{Need Help}\\ % First line
-      \midrule % Header rule
-    \global\let\goalnewline@\\
-    \global\let\\\goalnewline
-    }
-  {
-& $\square$ & $\square$ & $\square$
-  \end{tabular}
-   \global\let\\\orignewline}% Restore meaning of \\ outside tabular
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define Points Environment
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\RequirePackage{totcount}
-%\newcounter{points}
-%\newcommand{\points}[1]{%
-%\addtocounter{points}{#1}
-%(#1 pts)~\ignorespaces
-%}
-%\regtotcounter{points}%\total{points}
-
-%\let\pts\points
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Define Title Environment
@@ -458,237 +96,8 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define Exam Coverpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\newcommand{\instructions}[1]{\gdef\theinstructions{#1}}
-
-\instructions{
-
-\IfFileExists{instructions.tex}{\input{instructions.tex}}{%
-%
-\vspace{1cm}%
-\subsection*{Instructions}%
-%
-\begin{itemize}[leftmargin=1em]%
-%
-\item
-Scientific and Graphing Calculators are allowed on this exam. However, the use of cell phones and other unauthorized electronic devices is \textbf{prohibited}!
-
-\item
-In accordance with UTRGV policy, if you are caught cheating or helping someone cheat, both will receive an automatic grade of zero for the exam and will be reported for academic dishonesty.
-
-\item
-Once you start the exam, you may not leave the room until you turn in your exam.
-
-\item
-You have until the end of the class period to finish the exam.
-
-\item
-  Use a scantron form to bubble the answers to the muliple choice questions with a No. 2 pencil.
-
-\item
-Show your work!!
-
-\item
-Partial credit can be earned on free-response questions and is based on the
-quality of your work, not the quantity of your work.
-
-\item
-  Write neatly and be clear about the flow of your work.
-
-\item
-You will only receive credit for answers that are clearly supported by your work.
-
-\item
-  Use proper mathematical notation.
-  (Do not misuse the equals sign.)
-
-\item
-Unless stated otherwise, round all numerical final answers to two decimal places. Simplify as much as possible.
-
-
-\item
-Do all work on this exam and not on your own scratch paper.
-
-
-\item
-Please box your final answer if it is difficult to find.
-
-\end{itemize}
-
-}}
-
-
-\renewcommand{\maketitle}{
-\thispagestyle{firstpage}
-
-
-\textsf{\LARGE\bfseries\handouttitle}\\[2pt]
-\textsf{\LARGE\bfseries\thedate}
-
-}
-
-
-\newcommand{\maketitleblock}{
-\thispagestyle{firstpage}
-
-
-\textsf{\LARGE\bfseries\handouttitle}
-\hfill{}Name: \rule{3.25in-\widthof{Name: }}{0.5pt}\\[1.1em]
-\textsf{\LARGE\bfseries\thedate}
-\hfill{}Student ID: \rule{3.25in-\widthof{Student ID: }}{0.5pt}\\[1.4em]
-\mbox{}\hfill{}Section: \rule{1.0in}{0.5pt}%
-}
-
-
-\newcommand{\examcoverpage}{
-\thispagestyle{empty}
-\frontmatter
-\maketitleblock
-\theinstructions
-\insertblankpage
-\mainmatter  % start normal page numbering
-}
-
-
-% \usepackage{moreenum} % load near end (after enumitem package)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  redefine mcquestion environment
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \AtBeginDocument{
-  \ifdefined \setmcquestion
-  % keep questions and answers on same page
-    \renewenvironment{setmcquestion}
-      {\begin{minipage}[t]{\linewidth-\labelwidth}}
-        {\end{minipage}\par\vspace{1.0in plus 1.0in minus 0.5in}}
-  \fi
-  }
-
-\makeatother
-
-
-
-\RequirePackage{totcount}
-\newcounter{points}
-\newcommand{\points}[1]{%
-\addtocounter{points}{#1}
-(#1 pts)~\ignorespaces
-}
-\regtotcounter{points}%\total{points}
-
-\let\pts\points
-
-
-% redefine \sim to be more tightly spaced
-\let\TEMPsim\sim
-\renewcommand{\sim}{\TEMPsim\hspace{-.32em}}
-
-
-\newcommand{\n}{\relax}
-\newcommand{\p}{\relax}
 
 
 \pagestyle{toprunning}
 
 
-\usepackage{tabularx}
-\usepackage{pgffor} % for foreach
-\usepackage{etoolbox} % for xappto appto
-
-
-\def\insertpointstable{}
-\newcommand*\myfirstrowcontents{}
-\newcommand*\mysecondrowcontents{}
-
-
-\newcommand{\maketablecontents}[1]{
-  \renewcommand*\myfirstrowcontents{}
-  \renewcommand*\mysecondrowcontents{}
-  \foreach \j in {1,...,#1}{
-    \xappto\myfirstrowcontents{\j & }
-    \xappto\mysecondrowcontents{ & }
-    }
-}
-
-\newcolumntype{Y}{>{\centering\arraybackslash}X}%
-
-\newcommand{\pointstablebonus}[1]{
-\ifnumless{#1}{10}
-    {\newcolumntype{W}{>{\centering\arraybackslash}X}}
-    {\newcolumntype{W}{c}}
-\def\insertpointstable{
-\bgroup
-\renewcommand{\arraystretch}{1.8}
-\maketablecontents{#1}
-\begin{tabularx}{\linewidth}{|l *{#1}{|Y}|W|W|}
-  \hline
-  Question: & \myfirstrowcontents Bonus & Total \\
-  \hline
-  Score:    & & \mysecondrowcontents \\
-  \hline
-\end{tabularx}
-\egroup
-}
-}
-
-\newcommand{\pointstable}[1]{
-\ifnumless{#1}{13}
-    {\newcolumntype{W}{>{\centering\arraybackslash}X}}
-    {\newcolumntype{W}{c}}
-\def\insertpointstable{%
-\bgroup
-\renewcommand{\arraystretch}{1.8}
-\maketablecontents{#1}
-\begin{tabularx}{\linewidth}{|l *{#1}{|Y}|W|}
-  \hline
-  Question: &  \myfirstrowcontents   Total\\
-  \hline
-  Score:    & \mysecondrowcontents\\
-  \hline
-\end{tabularx}
-\egroup
-}
-}
-
-
-
-\usepackage[utf8]{inputenc}
-% \usepackage[paperwidth=8.5in, paperheight=11in, top=1in, bottom=.5in, left=.5in, right=.5in]{geometry}
-\usepackage{parskip,amsmath,amssymb,graphics,graphicx,paracol,lastpage,amsthm,amsmath,tikz,yhmath,tcolorbox,array}
-\usepackage{latexsym}
-%\usepackage{hyperref}
-\usepackage{framed}
-
-%%%%%%%%%%%%%%%New Commands%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Insert new commands here that you may use in more than one LT/Assessment
-
-%shortcut for \displaystyle
-\newcommand{\ds}{\displaystyle}
-
-% check and x-mark
-\usepackage{pifont}% http://ctan.org/pkg/pifont
-\newcommand{\cmark}{\ding{51}\,}%
-\newcommand{\xmark}{\ding{55}}%
-
-%shortcut for integrals and definite integrals
-\newcommand{\xint}[1]{\ds \int {#1}\, dx}
-\newcommand{\defxint}[3]{\ds \int_{#2}^{#3} {#1}\, dx}
-
-%different column styles for tabular
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-
-\graphicspath{{../}{./}{pictures/}{pictures/build/}{graphics/}{graphics/build/}{../L1/}{../L3/}}
-\makeatletter
-\def\input@path{{./Learning_Targets/}{../}{../DS1/}{../DS2/}{../DS3/}{../DS4/}{../L2/}{../L3/}}
-%or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
-\makeatother
-
-
-
-% \input{learning_targets}

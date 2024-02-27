@@ -1,22 +1,30 @@
 \usepackage{tcolorbox}
 \usepackage{xargs}
-\usepackage{xparse}
 \usepackage{ifthen}
-\usepackage{totcount}
 
 \newcounter{noncorelts}
+\newcounter{nonexamlts}
 \newcounter{corelts}
 \newcounter{totallts}
-\newcounter{gradeAp}
-\newcounter{gradeA}
 \newcounter{gradeArowI}
+\newcounter{gradeArowIleftover}
 \newcounter{gradeArowII}
-\newcounter{gradeB}
-\newcounter{gradeC}
+\newcounter{gradeArowIIleftover}
+\newcounter{gradeBrowI}
+\newcounter{gradeBrowIleftover}
 \newcounter{gradeCrowI}
+\newcounter{gradeCrowIleftover}
 \newcounter{gradeCrowII}
-\newcounter{gradeCrowIII}
+\newcounter{gradeCrowIIleftover}
 
+\newcounter{gradeCnonexamrowI}
+\newcounter{gradeCnonexamrowIleftover}
+\newcounter{gradeBnonexamrowI}
+\newcounter{gradeBnonexamrowIleftover}
+\newcounter{gradeAnonexamrowI}
+\newcounter{gradeAnonexamrowIleftover}
+\newcounter{gradeAnonexamrowII}
+\newcounter{gradeAnonexamrowIIleftover}
 
 \newcounter{leftoverI}
 \newcounter{leftoverII}
@@ -30,6 +38,29 @@
 
 % check and x-mark
 \usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}\,}%
+\newcommand{\xmark}{\ding{55}}%
+
+
+\newcommand{\Circ}{\tikz \fill (0cm,0cm) circle(1.50pt);}
+\newcommand{\bxO}{\tikz \draw[thick] (0,0) rectangle ++(0.5,0.5) ++(-0.25,-0.25) node {\Circ};}
+\newcommand{\bx}{\tikz \draw[thick] (0,0) rectangle ++(0.5,0.5) ++ (-0.20,-0.25) node {\phantom{\cmark}};}
+\newcommand{\bxI}{\tikz \draw[thick] (0,0) rectangle ++(0.5,0.5) ++ (-0.20,-0.25) node {\cmark};}
+\newcommand{\cxO}{\tikz \draw[thick] (0cm,0cm) circle(0.25cm)  node {\Circ};}
+\newcommand{\cx}{\tikz \draw[thick] (0cm,0cm) circle(0.25cm);}
+\newcommand{\cxI}{\tikz \draw[thick] (0cm,0cm) circle(0.25cm) ++ (0.03,0) node {\cmark};}
+
+% \newcommand{\tx}{\tikz[scale=1.1] \draw[thick] (0,0) -- (0.5,0.0) -- (0.25,0.433) --cycle;}% node {\Circ};}
+% \newcommand{\txI}{\tikz[scale=1.1] \draw[thick] (0,0) -- (0.5,0.0) -- (0.25,0.433) --cycle
+% ++ (0.28,+0.1800) node {\cmark};}% node {\Circ};}
+
+
+% \newcommand{\tx}{\tikz[scale=0.30] \draw[thick] (0,1) -- (1,0.0) -- (2,1) -- (1,2) --cycle;}% node {\Circ};}
+% \newcommand{\txI}{\tikz[scale=0.30] \draw[thick] (0,1) -- (1,0) -- (2,1) --
+% (1,2) --cycle ++ (1.2,0.7) node {\cmark};}
+
+\newcommand{\tx}{\bx}% node {\Circ};}
+\newcommand{\txI}{\bxI}
 
 
 \newcommand{\defaultcriteria}{%
@@ -43,23 +74,48 @@
 \newbool{#1ws}
 \newbool{#1ex}
 \newbool{#1corelt}
+\newbool{#1noncorelt}
+\newbool{#1nonexamlt}
+
+\booltrue{#1noncorelt}
+\boolfalse{#1corelt}
+\boolfalse{#1nonexamlt}
 
 \ifthenelse{\equal{#2}{1}}{%
-\expandafter\newcommand\csname#1marker\endcsname{*}
+\expandafter\newcommand\csname#1marker\endcsname{{\hspace{-0.7pt}\raisebox{-0.7em}{\huge{}*}}}
 \booltrue{#1corelt}
+\boolfalse{#1noncorelt}
 }{%
-\expandafter\newcommand\csname#1marker\endcsname{\relax}
-\boolfalse{#1corelt}
+  \expandafter\newcommand\csname#1marker\endcsname{\relax}
+  \boolfalse{#1corelt}
 }
 
-\expandafter\newcommand\csname#1\endcsname{%
-% \if #2 foo \else bar \fi
-\begin{tabular}{@{}m{0.90\textwidth}m{0.02\textwidth}m{0.02\textwidth}@{}}
-\textbf{\sffamily#3{\large\csname#1marker\endcsname}}: #4  & 
-\ifbool{#1ws}{\cxi\,}{\cxI\,} & 
-\ifbool{#1ex}{\bxi\,}{\bxI\,}
-\end{tabular}
-\\
+\ifthenelse{\equal{#2}{2}}{%
+  \booltrue{#1nonexamlt}
+  \boolfalse{#1noncorelt}
+}{
+  \boolfalse{#1nonexamlt}
+}
+
+\ifthenelse{\equal{#2}{2}}{
+  \expandafter\newcommand\csname#1\endcsname{%
+  % \if #2 foo \else bar \fi
+  \begin{tabular}{@{}m{0.90\textwidth}m{0.02\textwidth}m{0.02\textwidth}@{}}%
+  \textbf{\sffamily#3\csname#1marker\endcsname}: #4  &%
+  \ifbool{#1ws}{\cxI\,}{\cx\,} &%
+  \end{tabular}%
+  \\
+}
+}{
+  \expandafter\newcommand\csname#1\endcsname{%
+  % \if #2 foo \else bar \fi
+  \begin{tabular}{@{}m{0.90\textwidth}m{0.02\textwidth}m{0.02\textwidth}@{}}%
+  \textbf{\sffamily#3\csname#1marker\endcsname}: #4  &%
+  \ifbool{#1ws}{\cxI\,}{\cx\,} &%
+  \ifbool{#1ex}{\bxI\,}{\bx\,}%
+  \end{tabular}%
+  \\
+}
 }
 
 \expandafter\newcommand\csname#1set\endcsname[2]{%
@@ -68,11 +124,13 @@
 \ifbool{#1ex}{\ifbool{#1ws}{%
     \stepcounter{totallts}
     \ifbool{#1corelt}{\stepcounter{corelts}}{\relax}
+    \ifbool{#1noncorelt}{\stepcounter{noncorelts}}{\relax}
+    \ifbool{#1nonexamlt}{\stepcounter{nonexamlts}}{\relax}
 }{\relax}}{\relax}
 }
 
 \expandafter\newcommand\csname#1full\endcsname{%
-\ifbool{#1ex}{\ifbool{#1ws}{\bxi}{\bxI}}{\bxI}
+\ifbool{#1ex}{\ifbool{#1ws}{\txI}{\tx}}{\tx}
 }
 
 }
@@ -91,21 +149,20 @@
 
 \defineLT{LIII}{L3}{I can recognize points at which a function is (and is not) continuous and can use continuity to evaluate limits.}
 
-\defineLT{LIV}{L4}{I can describe the behavior of a function on an interval using the Intermediate Value Theorem.}
 
-\defineLT{LV}{L5}{I can identify limits in indeterminate form and apply L'Hopital's rule correctly. }
+\defineLT{LV}[2]{L5}{I can identify limits in indeterminate form and apply L'Hopital's rule correctly.}
 
 \defineLT{DMI}{DM1}{I can understand the limit definition of the derivative and calculate the derivative at a point.}
 
 
-\defineLT{DMII}[1]{DM2}{I can calculate and interpret instantaneous rates of
+\defineLT{DMII}[2]{DM2}{I can calculate and interpret instantaneous rates of
   change at a point using graphs and tables, and I can understand the difference
   between the instantaneous rate of change and the average rate of change.}
 
-\defineLT{DMIII}{DM3}{I can interpret the average and instantaneous rate of
+\defineLT{DMIII}[1]{DM3}{I can interpret the average and instantaneous rate of
 change using secant and tangent lines.}
 
-\defineLT{DMIV}[1]{DM4}{I can sketch the derivative function from the graph of a
+\defineLT{DMIV}[2]{DM4}{I can sketch the derivative function from the graph of a
 given function (specifically $f'$ from $f$).}
 
 
@@ -113,16 +170,12 @@ given function (specifically $f'$ from $f$).}
 point.}
 
 
-\defineLT{DMVI}{DM6}{I can recognize points at which a function is (and is not)
-  differentiable, and can use the definition or interpretation of the derivative
-to support my thinking.}
-
 
 \defineLT{DMVII}{DM7}{%
 I can use tangent lines to approximate function values, when appropriate.
 }
 
-\defineLT{DSI}[1]{DS1}{%
+\defineLT{DSI}{DS1}{%
 I can compute derivatives correctly using the constant, constant multiple, the
 power rules, and sum and difference rules of power functions.
 }
@@ -142,13 +195,10 @@ I can use a combination of the Product, Quotient, and Chain Rules to compute der
 }
 
 
-\defineLT{DSV}{DS5}{%
+\defineLT{DSV}[2]{DS5}{%
 I can compute derivatives correctly using implicit differentiation.
 }
 
-\defineLT{DSVI}{DS6}{%
-I can compute derivatives correctly using logarithmic differentiation.
-}
 
 \defineLT{DAI}{DA1}{I can correctly interpret the meaning of a derivative in
 context (e.g. velocity, acceleration).}
@@ -160,32 +210,30 @@ context (e.g. velocity, acceleration).}
 \defineLT{DAIII}{DA3}{I can interpret the meaning of the Mean Value Theorem.}
 
 
-\defineLT{DAIV}[1]{DA4}{I can explain the relationship between a function and its
-  first and second derivatives (concavity, increasing/decreasing, points of
-inflection).}
+\defineLT{DAIVa}{DA4a}{I can explain the relationship between a function and its first and second derivatives (concavity, increasing/decreasing, points of inflection). (Section 4.5)}
+
+\defineLT{DAIVb}[1]{DA4b}{I can apply the First Derivative Test and Second Derivative Test to locate local extrema.  (Section 4.5)}
 
 
 \defineLT{DAV}{DA5}{%
 I can solve related rates problems.
 }
 
-\defineLT{DAVI}{DA6}{%
-I can solve optimization problems.
-}
 
-\defineLT{FTCI}[1]{FTC1}{%
+
+\defineLT{FTCI}[2]{FTC1}{%
 I can compute anti-derivatives correctly using the constant, constant multiple, sum and difference rules of basic power functions, trigonometric, and exponential functions.
 }
 
 \defineLT{FTCII}{FTC2}{%
-I can use antidifferentiation to solve initial-value problems.
+I can use anti-differentiation to solve initial-value problems.
 }
 
 \defineLT{FTCIII}[1]{FTC3}{%
 I can evaluate definite integrals exactly by using the properties of definite integrals, graphs and geometry.
 }
 
-\defineLT{FTCIV}{FTC4}{%
+\defineLT{FTCIV}[2]{FTC4}{%
 I can estimate the values of definite integrals numerically using the left-hand sum or the right-hand sum.
 }
 
@@ -193,14 +241,18 @@ I can estimate the values of definite integrals numerically using the left-hand 
 I can evaluate definite integrals exactly by using the Fundamental Theorem of Calculus (FTC) part 2 with an antiderivative.
 }
 
-\defineLT{FTCVI}{FTC6}{%
+\defineLT{FTCVI}[2]{FTC6}{%
 I can interpret the physical meaning of a definite integral in terms of net area, net change, displacement, or distance, and state its units.
 }
 
-\defineLT{FTCVII}{FTC7}{%
+\defineLT{FTCVII}[2]{FTC7}{%
 I can explain and work with the FTC, part 1 to evaluate derivatives of integrals, including using functions defined by integrals.
 }
 
 \defineLT{FTCVIII}{FTC8}{%
 I can evaluate integrals using the Substitution Rule using definite and indefinite integrals.
 }
+
+
+\newcommand{\HWwarning}{{\large\color{red}\bfseries{} Warning: Your homework grade is
+currently too low to pass the course with a grade of C.}\\[0.5em]}
