@@ -1,0 +1,170 @@
+\documentclass{article}
+\input{preamble}
+\input{learningtargets}
+\usepackage{underscore}
+\usepackage{qrcode}
+\usepackage{adjustbox}
+
+
+
+
+\title{Math 2413: Learning Targets Checklist}
+\date{Spring 2024}
+
+\newcommand{\name}[1]{
+\gdef\ggname{#1}
+\gdef\ggheadername{ --\sffamily{}#1}
+}
+
+% \renewcommand{\section}[1]{
+% \gdef\ggsection{\;Section{}#1}
+% }
+\newcommand{\email}[1]{
+\gdef\ggemail{#1}
+}
+
+
+\newcommand{\hwgrade}[1]{
+\gdef\gghwgrade{#1}
+}
+
+\newcommand{\Message}[1]{
+\par
+{\large\sffamily
+   #1
+}
+\vspace{0.5em}
+}
+
+\renewcommand{\maketitle}{
+
+\setcounter{page}{1}
+\rhead{\sffamily{}Page \thepage~of~2}
+\lhead{{\sffamily{}\handouttitle}\ggheadername}
+\fancypagestyle{firstpage}{%
+    \lhead{}
+}
+
+\thispagestyle{firstpage}
+\textsf{\LARGE\bfseries\handouttitle}
+\large
+\sffamily
+\hfill{}\ggname\rule{2.5in-\widthof{\ggname}}{0.0pt}\\[0.3em]
+\textsf{\LARGE\bfseries\thedate}
+\hfill{}\ggemail\rule{2.5in-\widthof{\ggemail}}{0.0pt}\\[0.4em]
+\normalsize
+\normalfont
+
+}
+
+
+\begin{document}
+
+
+
+
+
+<<echo=FALSE, results='asis'>>=
+
+# read in grade data
+data <- read.csv("gb.csv", stringsAsFactors=FALSE)
+# read in learning targets (this allows for easier iteration through LTs)
+lts <- read.csv("learningtargets.csv")
+
+
+
+## set missing grades/data to 0
+data[is.na(data)] <- 0
+
+## trim worksheet and exam column names
+colnames(data) <- gsub("(.*)(ws|WS).*", "\\1ws", colnames(data), perl=TRUE)
+colnames(data) <- gsub("(.*)(ex|EX).*", "\\1ex", colnames(data), perl=TRUE)
+## rename webwork homework grade.  This handles several possible variations
+colnames(data) <- gsub(".*((WeBWorK)|(webwork)|(Webwork)|(omework)).*", "hw_grade", colnames(data), perl=TRUE)
+
+
+# the FTC4 LT only tests worksheets
+data$"L5.ex" <- data$"L5.ws"
+data$"DM2.ex" <- data$"DM2.ws"
+data$"DM4.ex" <- data$"DM4.ws"
+data$"DS5.ex" <- data$"DS5.ws"
+data$"FTC1.ex" <- data$"FTC1.ws"
+data$"FTC4.ex" <- data$"FTC4.ws"
+data$"FTC6.ex" <- data$"FTC6.ws"
+data$"FTC7.ex" <- data$"FTC7.ws"
+
+
+# LaTeX does not allow arabic numerals in macro names
+# map used for creating LaTeX macros
+NUMERAL_MAP <- data.frame(row.names = c("1", "2", "3", "4", "5", "6", "7", "8", "9", "4a", "4b"),
+             roman = c("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "IVa", "IVb"))
+
+
+# convert columns to vectors. prevents output issues
+FIRSTNAMES = as.vector(data$First.Name)
+LASTNAMES = as.vector(data$Last.Name)
+USERNAMES = as.vector(data$Username)
+
+
+# iterate over rows in gradebook
+for(i in 1:nrow(data)) {
+    row <- data[i,]
+
+    # do stuff with row
+    firstname = FIRSTNAMES[i]
+    lastname = LASTNAMES[i]
+    username = USERNAMES[i]
+
+    cat("\\name{", firstname, lastname, "}\n")
+    cat("\\email{", username,  "}\n")
+    cat("\\hwgrade{", row$hw_grade,  "}\n")
+    cat("\\maketitle{}\n")
+
+    # iterate over LTs and write LaTeX macro. Example: \LIVset{1}{1}
+    for(lt in lts$Name) {
+        lt_base <- gsub("(\\w+)(\\d+[a-b]*)", "\\1", lt, perl=TRUE)
+        lt_number <- gsub("(\\w+)(\\d+[a-b]*)", "\\2", lt, perl=TRUE)
+        lt_roman <- paste(lt_base, NUMERAL_MAP[lt_number, "roman"], sep="")
+        lt_ws <- paste(lt, ".ws", sep="")
+        lt_ex <- paste(lt, ".ex", sep="")
+
+        cat("\\", lt_roman, "set{", sep="")
+
+        if (row[lt_ws] == 1) {
+            cat("1", sep="")
+        } else{
+            cat("0", sep="")
+        }
+
+        cat("}{")
+
+        if (row[lt_ex] == 1) {
+            cat("1", sep="")
+        } else{
+            cat("0", sep="")
+        }
+
+        cat("}\n", sep="")
+    }
+
+
+    if (row$hw_grade < 65){
+      cat("\\HWwarning\n")
+
+    }
+
+    try(cat("\\Message{", row$message,  "}\n"))
+
+
+    cat("\\input{table}\n")
+    cat("\\newpage\n")
+    cat("\n\n")
+
+}
+
+
+
+@
+
+
+\end{document}
