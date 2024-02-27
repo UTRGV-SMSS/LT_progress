@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Garza
+    given-names: Guillermo
+title: "Learning Targets Progress Tracker"
+version: 1.0.0
+date-released: 2024-02-26
