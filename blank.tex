@@ -1,0 +1,68 @@
+\documentclass{article}
+\input{preamble}
+\input{learningtargets}
+\usepackage{underscore}
+\usepackage{qrcode}
+\usepackage{adjustbox}
+
+
+
+
+\title{Math 2413: Learning Targets Checklist}
+\date{Spring 2024}
+
+\newcommand{\name}[1]{
+\gdef\ggname{#1}
+\gdef\ggheadername{}%-- \sffamily{}#1}
+}
+
+% \renewcommand{\section}[1]{
+% \gdef\ggsection{\;Section{}#1}
+% }
+\newcommand{\email}[1]{
+\gdef\ggemail{#1}
+}
+
+
+\newcommand{\hwgrade}[1]{
+\gdef\gghwgrade{#1}
+}
+
+\renewcommand{\maketitle}{
+
+\setcounter{page}{1}
+\rhead{\sffamily{}Page \thepage~of~2}
+\lhead{{\sffamily{}\handouttitle}\ggheadername}
+\fancypagestyle{firstpage}{%
+    \lhead{}
+}
+
+\thispagestyle{firstpage}
+\textsf{\LARGE\bfseries\handouttitle}
+\large
+\sffamily
+\hfill{}\ggname\rule{2.5in-\widthof{\ggname}}{0.0pt}\\[0.3em]
+\textsf{\LARGE\bfseries\thedate}
+\hfill{}\ggemail\rule{2.5in-\widthof{\ggemail}}{0.0pt}\\[0.4em]
+\normalsize
+\normalfont
+
+}
+
+
+\begin{document}
+
+
+
+
+
+\name{}
+\email{}
+\hwgrade{0}
+\maketitle
+
+
+\input{table.tex}
+
+
+\end{document}
