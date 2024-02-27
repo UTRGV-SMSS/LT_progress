@@ -4,6 +4,9 @@
 These files generate a PDF checklist of Learning Targets and a Progress Grid updated from a Blackboard gradebook for all students.
 
 
+The main logic is written in the R Programming Language and is in the file "all_students.Rtex".  
+
+
 To generate the PDF on Overleaf
 
 1. Go to your Blackboard course shell and go to download your grades.  Under "OPTIONS" on the download page, select "Comma" as the Delimiter Type.  Download the grades.
